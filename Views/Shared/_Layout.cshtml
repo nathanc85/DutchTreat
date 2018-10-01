@@ -6,7 +6,16 @@
         <link rel="stylesheet" href="~/css/site.css">
     </head>
     <body>
-      <header>Welcome to Dutch Treat</header>
+      <header>
+        <h1>Welcome to Dutch Treat</h1>
+        <menu>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/app/contact">Contact Us</a></li>
+            <li><a href="/app/about">About</a></li>
+          </ul>
+        </menu>
+      </header>
       <section>
         <h1>@ViewBag.Title</h1>
         @RenderBody()
