@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Dutch Treat: @ViewBag.Title </title>
+        <link rel="stylesheet" href="~/css/site.css">
+    </head>
+    <body>
+      <header>Welcome to Dutch Treat</header>
+      <section>
+        <h1>@ViewBag.Title</h1>
+        @RenderBody()
+      </section>
+      <footer>Copyright 2018 Dutch Treat LLC</footer>
+
+        <!-- 
+            prevents the javascript from running before all the page content has been rendered 
+            remember that the libraries will be loaded in the order that they are specified    
+        -->
+        <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="~/js/index.js"></script>
+    </body>
+</html>
