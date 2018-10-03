@@ -25,9 +25,12 @@ namespace DutchTreat
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
+            else {
+                app.UseExceptionHandler("/error");
+            }
             //app.UseDefaultFiles();
             app.UseStaticFiles();
-            //app.UseNodeModules(env);
+            app.UseNodeModules(env);
             app.UseMvc(cfg =>
             {
                 cfg.MapRoute("Default",
