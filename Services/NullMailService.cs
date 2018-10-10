@@ -12,6 +12,7 @@ namespace DutchTreat.Services
         }
         public void SendMessage(string to, string subject, string body) {
             // Log Message.
+            _logger.LogInformation($"To: {to} Subject: {subject} Body: {body}");
         }
     }
 }
