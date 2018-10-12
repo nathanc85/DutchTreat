@@ -1,33 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Dutch Treat: @ViewBag.Title </title>
-        <link rel="stylesheet" href="~/css/site.css">
-    </head>
-    <body>
-      <header>
-        <h1>Welcome to Dutch Treat</h1>
-        <menu>
-          <ul>
-            <li><a asp-controller="App" asp-action="Index">Home</a></li>
-            <li><a asp-controller="App" asp-action="Contact">Contact Us</a></li>
-            <li><a asp-controller="App" asp-action="About">About</a></li>
-          </ul>
-        </menu>
-      </header>
-      <section>
+<head>
+    <meta charset="utf-8" />
+    <title>Dutch Treat: @ViewBag.Title </title>
+    <link rel="stylesheet" href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header class="container">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <h1 class="navbar-brand">Welcome to Dutch Treat</h1>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#theMenu" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="theMenu" class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item active"><a class="nav-link" asp-controller="App" asp-action="Index">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="Contact">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="About">About</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="container">
         <h1>@ViewBag.Title</h1>
         @RenderBody()
-      </section>
-      <footer>Copyright 2018 Dutch Treat LLC</footer>
+    </section>
+    <footer class="container">
+        <div class="text-center">Copyright 2018 Dutch Treat LLC</div>
+    </footer>
+    <!--
+        prevents the javascript from running before all the page content has been rendered
+        remember that the libraries will be loaded in the order that they are specified
+    -->
+    <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/index.js"></script>
 
-        <!-- 
-            prevents the javascript from running before all the page content has been rendered 
-            remember that the libraries will be loaded in the order that they are specified    
-        -->
-        <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="~/js/index.js"></script>
-        @RenderSection("scripts", false)
-    </body>
+    @RenderSection("scripts", false)
+</body>
 </html>
