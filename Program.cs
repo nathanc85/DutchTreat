@@ -12,23 +12,35 @@ namespace DutchTreat
 {
     public class Program
     {
-    //     public static void Main(string[] args)
-    //     {
-    //         CreateWebHostBuilder(args).Build().Run();
-    //     }
+        //     public static void Main(string[] args)
+        //     {
+        //         CreateWebHostBuilder(args).Build().Run();
+        //     }
 
-    //     public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-    //         WebHost.CreateDefaultBuilder(args)
-    //             .UseStartup<Startup>();
-    // }
-    public static void Main(string[] args)
-    {
-      BuildWebHost(args).Run();
+        //     public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        //         WebHost.CreateDefaultBuilder(args)
+        //             .UseStartup<Startup>();
+        // }
+        public static void Main(string[] args)
+        {
+            BuildWebHost(args).Run();
+        }
+
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                   .ConfigureAppConfiguration(SetupConfiguration)
+                .UseStartup<Startup>()
+                .Build();
+
+        private static void SetupConfiguration(WebHostBuilderContext ctx, IConfigurationBuilder builder)
+        {
+            // Removing the default configuration options.
+            builder.Sources.Clear();
+
+            builder.AddJsonFile("config.json", false, true)
+                   .AddXmlFile("config.xml", true)
+                   .AddEnvironmentVariables();
+
+        }
     }
-
-    public static IWebHost BuildWebHost(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>()
-            .Build();
-  }
 }

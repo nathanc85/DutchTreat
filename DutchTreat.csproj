@@ -9,5 +9,9 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Data\Entities\" />
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="config.config" />
   </ItemGroup>
 </Project>
