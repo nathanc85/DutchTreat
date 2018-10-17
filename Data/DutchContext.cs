@@ -25,5 +25,22 @@ namespace DutchTreat.Data
         public DutchContext()
         {
         }
+
+        // How the mapping happens between our entities and database.
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Order>()
+                        .HasData(new Order()
+            {
+                Id = 1,
+                OrderDate = DateTime.UtcNow,
+                OrderNumber = "12345"
+            });
+            //modelBuilder.Entity<Product>()
+                        //.Property(p => p.Title)
+                        //.HasMaxLength(50);
+        }
     }
 }
