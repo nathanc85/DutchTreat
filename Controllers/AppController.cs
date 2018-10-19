@@ -13,53 +13,61 @@ namespace DutchTreat.Controllers
     public class AppController : Controller
     {
         private readonly IMailService _mailService;
-        private readonly DutchContext _context;
+        private readonly DutchContext _ctx;
 
-        public AppController(IMailService mailService, DutchContext context)
+        public AppController(IMailService mailService, DutchContext ctx)
         {
             _mailService = mailService;
-            _context = context;
+            _ctx = ctx;
         }
 
-        public IActionResult Index() {
+        public IActionResult Index()
+        {
+            var results = _ctx.Products.ToList();
             return View();
         }
 
         [HttpGet("contact")]
-        public IActionResult Contact() {
+        public IActionResult Contact()
+        {
             //throw new Exception("Bad bad info");
             //ViewBag.Title = "Contact Us";
             return View();
         }
 
         [HttpPost("contact")]
-        public IActionResult Contact(ContactViewModel model) {
-            if (ModelState.IsValid) {
+        public IActionResult Contact(ContactViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
                 // Send email.
                 _mailService.SendMessage("cnlnat@yahoo.com", model.Subject, $"From: {model.Name} - {model.Email}, Message: {model.Message}");
                 ViewBag.UserMessage = "Email sent...";
                 ModelState.Clear();
             }
-            else {
+            else
+            {
                 // Show errors.
             }
 
             return View();
         }
 
-        public IActionResult About() {
+        public IActionResult About()
+        {
             ViewBag.Title = "About Us";
             return View();
         }
 
-        public IActionResult Shop() {
+        public IActionResult Shop()
+        {
             //var results = _context.Products
-                                  //.OrderBy(p => p.Category)
-                                  //.ToList();
+            //.OrderBy(p => p.Category)
+            //.ToList();
             // OR with LINQ
-            var results = from p in _context.Products
-                               orderby p.Category
-                               select p;
+            var results = from p in _ctx.Products
+                          orderby p.Category
+                          select p;
             return View(results.ToList());
         }
     }

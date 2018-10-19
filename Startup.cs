@@ -27,9 +27,13 @@ namespace DutchTreat
         public void ConfigureServices(IServiceCollection services)
         {
             // Adding the context for the database.
-            services.AddDbContext<DutchContext>(cfg => {
+            services.AddDbContext<DutchContext>(cfg =>
+            {
                 cfg.UseSqlServer(_config.GetConnectionString("DutchConnectionString"));
             });
+
+            services.AddTransient<DutchSeeder>();
+
             services.AddTransient<IMailService, NullMailService>();
             // Support for real mail service.
             services.AddMvc();
@@ -42,10 +46,12 @@ namespace DutchTreat
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment()) {
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
             }
-            else {
+            else
+            {
                 app.UseExceptionHandler("/error");
             }
             //app.UseDefaultFiles();
@@ -55,7 +61,7 @@ namespace DutchTreat
             {
                 cfg.MapRoute("Default",
                     "/{controller}/{action}/{id?}",
-                    new { controller = "App", Action = "Index"});
+                    new { controller = "App", Action = "Index" });
             });
         }
     }

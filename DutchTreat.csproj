@@ -13,5 +13,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="config.config" />
+    <Content Remove="Data\art.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\art.json" />
   </ItemGroup>
 </Project>
