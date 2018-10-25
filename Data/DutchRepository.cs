@@ -2,23 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using DutchTreat.Data.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace DutchTreat.Data
 {
     public class DutchRepository : IDutchRepository
     {
         private readonly DutchContext _ctx;
+        private readonly ILogger<DutchRepository> _logger;
 
-        public DutchRepository(DutchContext ctx)
+        public DutchRepository(DutchContext ctx, ILogger<DutchRepository> logger)
         {
             _ctx = ctx;
+            _logger = logger;
         }
 
         public IEnumerable<Product> GetAllProducts()
         {
-            return _ctx.Products
-                       .OrderBy(o => o.Title)
-                       .ToList();
+            try
+            {
+                _logger.LogInformation("GetAllProducts was called");
+
+                return _ctx.Products
+                           .OrderBy(o => o.Title)
+                           .ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error GetAllProducts(): {ex}");
+                return null;
+            }
         }
 
         public IEnumerable<Product> GetProductsByCategory(string category)
