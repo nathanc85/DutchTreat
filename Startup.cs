@@ -32,10 +32,12 @@ namespace DutchTreat
                 cfg.UseSqlServer(_config.GetConnectionString("DutchConnectionString"));
             });
 
+            services.AddTransient<IMailService, NullMailService>();
+
             services.AddTransient<DutchSeeder>();
 
-            services.AddTransient<IMailService, NullMailService>();
-            // Support for real mail service.
+            services.AddScoped<IDutchRepository, DutchRepository>();
+
             services.AddMvc();
 
             // This is the connection string at home. Find the IP by running: $ ipconfig getifaddr en0 .

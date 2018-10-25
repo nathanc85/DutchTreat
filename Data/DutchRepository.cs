@@ -5,7 +5,7 @@ using DutchTreat.Data.Entities;
 
 namespace DutchTreat.Data
 {
-    public class DutchRepository
+    public class DutchRepository : IDutchRepository
     {
         private readonly DutchContext _ctx;
 
@@ -27,6 +27,11 @@ namespace DutchTreat.Data
                        .Where(w => w.Title == category)
                        .OrderBy(o => o.Title)
                        .ToList();
+        }
+
+        public bool SaveAll()
+        {
+            return _ctx.SaveChanges() > 0;
         }
     }
 }
