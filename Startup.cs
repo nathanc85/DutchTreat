@@ -38,7 +38,8 @@ namespace DutchTreat
 
             services.AddScoped<IDutchRepository, DutchRepository>();
 
-            services.AddMvc();
+            services.AddMvc()
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // This is the connection string at home. Find the IP by running: $ ipconfig getifaddr en0 .
             //var connectionString = Startup.Configuration["connectionStrings:cityInfoDBConnectionString"];

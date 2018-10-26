@@ -46,5 +46,11 @@ namespace DutchTreat.Data
         {
             return _ctx.SaveChanges() > 0;
         }
+
+        public IEnumerable<Order> GetAllOrders()
+        {
+            return _ctx.Orders.ToList();
+        }
+
     }
 }
