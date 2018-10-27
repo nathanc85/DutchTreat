@@ -11,30 +11,30 @@ namespace DutchTreat.Data
 {
     public class DutchSeeder
     {
-        private readonly DutchContext ctx;
-        private readonly IHostingEnvironment hosting;
+        private readonly DutchContext _ctx;
+        private readonly IHostingEnvironment _hosting;
 
         public DutchSeeder(DutchContext ctx, IHostingEnvironment hosting)
         {
-            this.ctx = ctx;
-            this.hosting = hosting;
+            _ctx = ctx;
+            _hosting = hosting;
         }
 
         public void Seed()
         {
-            ctx.Database.EnsureCreated();
+            _ctx.Database.EnsureCreated();
 
-            if (!ctx.Products.Any())
+            if (!_ctx.Products.Any())
             {
                 // Create sample data.
-                var filePath = Path.Combine(hosting.ContentRootPath, "Data/art.json");
+                var filePath = Path.Combine(_hosting.ContentRootPath, "Data/art.json");
                 var json = File.ReadAllText(filePath);
 
                 var products = JsonConvert.DeserializeObject<IEnumerable<Product>>(json);
 
-                ctx.Products.AddRange(products);
+                _ctx.Products.AddRange(products);
 
-                var order = ctx.Orders.Where(o => o.Id == 1).FirstOrDefault();
+                var order = _ctx.Orders.Where(o => o.Id == 1).FirstOrDefault();
                 if (order != null)
                 {
                     order.Items = new List<OrderItem>()
@@ -49,7 +49,7 @@ namespace DutchTreat.Data
 
                 }
 
-                ctx.SaveChanges();
+                _ctx.SaveChanges();
             }
         }
     }

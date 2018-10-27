@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace DutchTreat
 {
@@ -39,7 +40,8 @@ namespace DutchTreat
             services.AddScoped<IDutchRepository, DutchRepository>();
 
             services.AddMvc()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                    .AddJsonOptions(o => o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             // This is the connection string at home. Find the IP by running: $ ipconfig getifaddr en0 .
             //var connectionString = Startup.Configuration["connectionStrings:cityInfoDBConnectionString"];
