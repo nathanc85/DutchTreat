@@ -64,5 +64,10 @@ namespace DutchTreat.Data
                        .Where(w => w.Id == id)
                        .FirstOrDefault();
         }
+
+        public void AddEntity(object model)
+        {
+            _ctx.Add(model);
+        }
     }
 }
