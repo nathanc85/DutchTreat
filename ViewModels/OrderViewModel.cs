@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DutchTreat.ViewModels
@@ -22,5 +23,6 @@ namespace DutchTreat.ViewModels
             get;
             set;
         }
+        public ICollection<OrderItemViewModel> Items { get; set; }
     }
 }
