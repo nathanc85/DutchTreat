@@ -48,12 +48,20 @@ namespace DutchTreat.Data
             return _ctx.SaveChanges() > 0;
         }
 
-        public IEnumerable<Order> GetAllOrders()
+        public IEnumerable<Order> GetAllOrders(bool includeItems)
         {
-            return _ctx.Orders
+            if (includeItems)
+            {
+                return _ctx.Orders
                        .Include(i => i.Items)
                        .ThenInclude(t => t.Product)
                        .ToList();
+            }
+            else
+            {
+                return _ctx.Orders
+                       .ToList();
+            }
         }
 
         public Order GetOrderById(int id)
