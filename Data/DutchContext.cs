@@ -1,12 +1,13 @@
 ﻿using System;
 using DutchTreat.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DutchTreat.Data
 {
-    public class DutchContext : DbContext
+    public class DutchContext : IdentityDbContext<StoreUser>
     {
-        public DutchContext(DbContextOptions<DutchContext> options): base(options)
+        public DutchContext(DbContextOptions<DutchContext> options) : base(options)
         {
 
         }
@@ -33,14 +34,14 @@ namespace DutchTreat.Data
 
             modelBuilder.Entity<Order>()
                         .HasData(new Order()
-            {
-                Id = 1,
-                OrderDate = DateTime.UtcNow,
-                OrderNumber = "12345"
-            });
+                        {
+                            Id = 1,
+                            OrderDate = DateTime.UtcNow,
+                            OrderNumber = "12345"
+                        });
             //modelBuilder.Entity<Product>()
-                        //.Property(p => p.Title)
-                        //.HasMaxLength(50);
+            //.Property(p => p.Title)
+            //.HasMaxLength(50);
         }
     }
 }
