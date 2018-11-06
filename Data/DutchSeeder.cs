@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using DutchTreat.Data.Entities;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 
 namespace DutchTreat.Data
@@ -13,16 +14,38 @@ namespace DutchTreat.Data
     {
         private readonly DutchContext _ctx;
         private readonly IHostingEnvironment _hosting;
+        private readonly UserManager<StoreUser> _userManager;
 
-        public DutchSeeder(DutchContext ctx, IHostingEnvironment hosting)
+        public DutchSeeder(DutchContext ctx, IHostingEnvironment hosting, UserManager<StoreUser> userManager)
         {
             _ctx = ctx;
             _hosting = hosting;
+            _userManager = userManager;
         }
 
-        public void Seed()
+        public async Task SeedAsync()
         {
             _ctx.Database.EnsureCreated();
+
+            StoreUser user = await _userManager.FindByEmailAsync("nathan@dutchtreat.com");
+
+            if (user == null)
+            {
+                user = new StoreUser()
+                {
+                    FirstName = "Nathan",
+                    LastName = "Something",
+                    Email = "nathan@dutchtreat.com",
+                    UserName = "nathan@dutchtreat.com"
+                };
+
+                var result = await _userManager.CreateAsync(user, "P@ssw0rd!");
+
+                //if (result != IdentityResult.Success)
+                //{
+                //    throw new InvalidOperationException("Could not create new user in the Seeder");
+                //}
+            }
 
             if (!_ctx.Products.Any())
             {
@@ -37,6 +60,7 @@ namespace DutchTreat.Data
                 var order = _ctx.Orders.Where(o => o.Id == 1).FirstOrDefault();
                 if (order != null)
                 {
+                    order.User = user;
                     order.Items = new List<OrderItem>()
                     {
                         new OrderItem

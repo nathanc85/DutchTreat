@@ -12,6 +12,7 @@ namespace DutchTreat.Data.Entities
         public DateTime OrderDate { get; set; }
         public string OrderNumber { get; set; }
         public ICollection<OrderItem> Items { get; set; }
+        // The user that owns this order.
         public StoreUser User
         {
             get;
