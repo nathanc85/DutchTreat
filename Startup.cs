@@ -36,6 +36,10 @@ namespace DutchTreat
             })
             .AddEntityFrameworkStores<DutchContext>();
 
+            services.AddAuthentication()
+                    .AddCookie()
+                    .AddJwtBearer();
+
             // Adding the context for the database.
             services.AddDbContext<DutchContext>(cfg =>
                 {
