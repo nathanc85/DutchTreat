@@ -5,7 +5,8 @@
     "ConnectionStrings": {
         // Run this command to find the correct IP: $ ipconfig getifaddr en0
         // OR this one: $ ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'
-        "DutchConnectionString": "User ID=sa;Password=SuperParola01;Server=192.168.1.9;Database=DutchTreatDb;"
+        //"DutchConnectionString": "User ID=sa;Password=SuperParola01;Server=192.168.1.8;Database=DutchTreatDb;"
+        "DutchConnectionString": "User ID=sa;Password=SuperParola01;Server=10.28.109.156;Database=DutchTreatDb;"
         //"DutchConnectionString": "User ID=sa;Password=SuperParola01;Server=10.28.109.156;Database=DutchTreatDb;"
     },
     "Logging": {
@@ -14,6 +15,11 @@
             //"DutchTreat": "Information",
             "Microsoft": "Warning"
         }
+    },
+    "Tokens": {
+        "Key": "fajlwnegeofnsaflksanlkgnafd",
+        "Issuer": "localhost",
+        "Audience": "users"
     }
 
 }
